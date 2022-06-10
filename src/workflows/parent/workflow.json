@@ -1,0 +1,88 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Initialize_destination": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "destination",
+                            "type": "string",
+                            "value": "@{rand(1000, 1000000)}"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Initialize_source": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Initialize_message": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "message",
+                            "type": "string",
+                            "value": "@{concat('From ', variables('source'), ' to ', variables('destination'))}"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Initialize_destination": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Initialize_source": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "source",
+                            "type": "string",
+                            "value": "@{rand(1000, 1000000)}"
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "InitializeVariable"
+            },
+            "logicapps-nested": {
+                "inputs": {
+                    "body": {
+                        "destination": "@variables('destination')",
+                        "message": "@variables('message')",
+                        "source": "@variables('source')"
+                    },
+                    "host": {
+                        "triggerName": "manual",
+                        "workflow": {
+                            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/workflows/{workflowName}"
+                        }
+                    }
+                },
+                "runAfter": {
+                    "Initialize_message": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Workflow"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {},
+        "triggers": {
+            "manual": {
+                "inputs": {
+                    "schema": {}
+                },
+                "kind": "Http",
+                "type": "Request"
+            }
+        }
+    },
+    "parameters": {}
+}

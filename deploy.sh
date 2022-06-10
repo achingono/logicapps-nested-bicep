@@ -1,0 +1,1 @@
+az deployment sub create --location "canadacentral" --template-file "./iac/main.bicep" --parameters prefix='logicapps'
