@@ -69,6 +69,19 @@
                     ]
                 },
                 "type": "Workflow"
+            },
+            "Response": {
+                "inputs": {
+                    "body": "@body('logicapps-nested')",
+                    "statusCode": 200
+                },
+                "kind": "Http",
+                "runAfter": {
+                    "logicapps-nested": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Response"
             }
         },
         "contentVersion": "1.0.0.0",
