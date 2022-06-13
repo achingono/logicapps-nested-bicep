@@ -9,10 +9,11 @@ on:
     branches: [ "main" ]
     paths:
       - "./iac/**"
+      - "./src/**"
   pull_request:
     branches: [ "main" ]
     paths:
-      - "./iac/bicep/**"
+      - "./iac/**"
       - "./src/**"
      
   # Allows you to run this workflow manually from the Actions tab
