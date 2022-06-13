@@ -23,8 +23,6 @@ module nestedLogicApp './logicApp.bicep' = {
   }
 }
 
-// replace tokens in workflow definition file
-var source = replace(replace(replace(loadTextContent('../src/workflows/parent/workflow.json'), '{subscriptionId}', subscription().id), '{resourceGroup}', group.name), '{workflowName}', nestedLogicApp.name)
 
 // parent logic app
 module parentLogicApp './logicApp.bicep' = {
@@ -32,7 +30,7 @@ module parentLogicApp './logicApp.bicep' = {
   scope: resourceGroup(group.name)
   params: {
     workflowName: '${prefix}-parent-${suffix}'
-    workflowSource: json(source)
+    workflowSource: json(replace(replace(replace(loadTextContent('../src/workflows/parent/workflow.json'), '{subscriptionId}', subscription().id), '{resourceGroup}', group.outputs.name), '{workflowName}', nestedLogicApp.outputs.name))
     location: location
   }
   dependsOn: [

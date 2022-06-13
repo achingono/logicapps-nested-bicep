@@ -10,3 +10,4 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 }
 
 output name string = resourceGroup.name
+output id string = resourceId('Microsoft.Resources/resourceGroups', resourceGroup.name)

@@ -15,3 +15,4 @@ resource logicApp 'Microsoft.Logic/workflows@2019-05-01' = {
 }
 
 output name string = logicApp.name
+output id string = resourceId('Microsoft.Logic/workflows', logicApp.name)

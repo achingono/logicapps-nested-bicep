@@ -59,7 +59,7 @@
                     "host": {
                         "triggerName": "manual",
                         "workflow": {
-                            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/workflows/{workflowName}"
+                            "id": "{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/workflows/{workflowName}"
                         }
                     }
                 },
